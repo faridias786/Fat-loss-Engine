@@ -64,6 +64,16 @@
   }
   .masthead .spacer { flex: 1; }
 
+  .mobile-note { display: none; }
+  @media (max-width: 900px) {
+    .mobile-note {
+      display: block;
+      margin: 0; padding: 0.6rem 1rem;
+      background: #FBF3E1; border-bottom: 1px solid var(--rule);
+      font-size: 0.78rem; color: var(--ink-soft);
+    }
+  }
+
   /* ---- layout ---- */
   .shell {
     display: grid;
@@ -322,6 +332,8 @@
   <span class="sub" id="libinfo">loading library…</span>
 </header>
 
+<p class="mobile-note">Best viewed on a larger screen — switch to desktop mode (or widen your browser) for the full layout, charts, and tables.</p>
+
 <div class="shell">
   <aside class="controls">
     <div class="eyebrow">Person</div>
@@ -461,19 +473,19 @@ chips($('injuries'), INJ.map((i) => [i, i.replace(/_/g, ' ')]), 'injuries');
 chips($('parq'), PARQ_KEYS.map((k) => [k, 'PAR-Q: ' + k.replace(/([A-Z])/g, ' $1').toLowerCase()]), 'parq');
 chips($('scoff'), SCOFF_KEYS.map((k) => [k, 'SCOFF: ' + k.replace(/([A-Z])/g, ' $1').toLowerCase()]), 'scoff');
 const MEASURES = [
-  ['waistCm', 'Waist', 92],
-  ['hipCm', 'Hip', 106],
-  ['bellyCm', 'Belly', 96],
-  ['thighCm', 'Thigh', 58],
-  ['armCm', 'Arm', 30],
+  ['waistCm', 'Waist', 36.2],
+  ['hipCm', 'Hip', 41.7],
+  ['bellyCm', 'Belly', 37.8],
+  ['thighCm', 'Thigh', 22.8],
+  ['armCm', 'Arm', 11.8],
 ];
 
 $('measurements').innerHTML = MEASURES.map(([id, label, def]) => `
   <div class="row2">
-    <div class="field"><label for="${id}">${esc(label)} (cm)</label>
-      <input type="number" id="${id}" value="${def}" placeholder="estimated"></div>
+    <div class="field"><label for="${id}">${esc(label)} (in)</label>
+      <input type="number" id="${id}" value="${def}" step="0.1" placeholder="estimated"></div>
     <div class="field"><label for="${id}_target">${esc(label)} target</label>
-      <input type="number" id="${id}_target" placeholder="auto"></div>
+      <input type="number" id="${id}_target" step="0.1" placeholder="auto"></div>
   </div>
   <p class="hint" id="${id}_hint" style="font-size:0.68rem;color:var(--ink-soft);margin:-0.3rem 0 0.6rem"></p>`).join('')
   + `<p style="font-size:0.7rem;color:var(--ink-soft);margin:0.2rem 0 0.6rem">
@@ -529,7 +541,7 @@ function updateMeasurementEstimates() {
   for (const [id] of MEASURES) {
     const el = $(id);
     if (el.dataset.touched === '1') continue;
-    el.value = estimate[id];
+    el.value = cmToIn(estimate[id]);
   }
 }
 
@@ -554,7 +566,7 @@ function updateMeasurementHints() {
     if (current == null || target == null) { hint.textContent = ''; continue; }
     const gap = Math.round((current - target) * 10) / 10;
     hint.textContent = gap === 0 ? `at target`
-      : gap > 0 ? `${gap} cm to go` : `${Math.abs(gap)} cm past target`;
+      : gap > 0 ? `${gap} in to go` : `${Math.abs(gap)} in past target`;
   }
 }
 
@@ -581,6 +593,13 @@ const num = (id) => {
   return v === '' ? null : Number(v);
 };
 
+/* Measurements are shown to the user in inches; the engine always works in
+   cm (same as height), so every read/write across the boundary converts. */
+const IN_TO_CM = 2.54;
+const cmToIn = (v) => v == null ? null : Math.round((v / IN_TO_CM) * 10) / 10;
+const inToCm = (v) => v == null ? null : Math.round(v * IN_TO_CM * 10) / 10;
+const numCm = (id) => inToCm(num(id));
+
 function readForm() {
   const flags = checked('flags');
   const boolMap = (keys) => Object.fromEntries(keys.map((k) => [k, true]));
@@ -602,12 +621,12 @@ function readForm() {
     sleepHours: num('sleepHours'),
     stress: Number(radioValue('stress') ?? 3),
     measurements: {
-      waistCm: num('waistCm'), hipCm: num('hipCm'), bellyCm: num('bellyCm'),
-      thighCm: num('thighCm'), armCm: num('armCm'),
+      waistCm: numCm('waistCm'), hipCm: numCm('hipCm'), bellyCm: numCm('bellyCm'),
+      thighCm: numCm('thighCm'), armCm: numCm('armCm'),
     },
     measurementTargets: {
-      waistCm: num('waistCm_target'), hipCm: num('hipCm_target'), bellyCm: num('bellyCm_target'),
-      thighCm: num('thighCm_target'), armCm: num('armCm_target'),
+      waistCm: numCm('waistCm_target'), hipCm: numCm('hipCm_target'), bellyCm: numCm('bellyCm_target'),
+      thighCm: numCm('thighCm_target'), armCm: numCm('armCm_target'),
     },
     health: {
       pregnant: flags.includes('pregnant'),
@@ -712,7 +731,7 @@ function milestoneTable(sim) {
     ${pts.map((p) => `<tr>
       <td class="dose">${p.week}</td>
       <td class="dose">${p.weightKg} kg</td>
-      ${measureKeys.map((k) => `<td class="dose">${p.measurements?.[k] != null ? p.measurements[k] + ' cm' : '—'}</td>`).join('')}
+      ${measureKeys.map((k) => `<td class="dose">${p.measurements?.[k] != null ? cmToIn(p.measurements[k]) + ' in' : '—'}</td>`).join('')}
       <td class="dose">${p.intakeKcal ?? '—'}</td>
       <td class="dose">${p.maintenanceKcal ?? '—'}</td>
     </tr>`).join('')}</table></div>
@@ -758,10 +777,10 @@ function forecastCard(f, input) {
     ? progressBar(' kg', input.weightKg, input.goalWeightKg, pickCheckpoints(pts, (p) => p.weightKg))
     : '';
   const measureBars = MEASURES.map(([id, label]) => {
-    const start = input.measurements?.[id];
-    const target = input.measurementTargets?.[id];
+    const start = cmToIn(input.measurements?.[id]);
+    const target = cmToIn(input.measurementTargets?.[id]);
     if (start == null || target == null) return '';
-    const bar = progressBar(' cm', start, target, pickCheckpoints(pts, (p) => p.measurements?.[id]));
+    const bar = progressBar(' in', start, target, pickCheckpoints(pts, (p) => cmToIn(p.measurements?.[id])));
     return bar ? `<p style="font-size:0.72rem;color:var(--ink-soft);margin:0 0 -0.6rem">${esc(label)}</p>${bar}` : '';
   }).join('');
 
