@@ -73,7 +73,17 @@
   }
   @media (max-width: 900px) {
     .shell { grid-template-columns: 1fr; }
-    aside.controls { border-right: none !important; border-bottom: 1px solid var(--rule); }
+    aside.controls {
+      border-right: none !important; border-bottom: 1px solid var(--rule);
+      position: static; max-height: none; overflow-y: visible;
+    }
+  }
+  @media (max-width: 480px) {
+    .row2 { grid-template-columns: 1fr; }
+    .masthead { padding: 1rem; }
+    .masthead h1 { font-size: 1.15rem; }
+    table.ex { font-size: 0.74rem; }
+    .card, main.readout, aside.controls { padding: 1rem; }
   }
 
   aside.controls {
@@ -234,6 +244,7 @@
   .session .name { font-family: var(--cond); font-weight: 700; font-size: 0.95rem; }
   .session .meta { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-soft); }
   .session .warm { font-size: 0.75rem; color: var(--ink-soft); margin: 0.3rem 0 0.5rem; }
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   table.ex { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
   table.ex td { padding: 0.28rem 0.4rem 0.28rem 0; vertical-align: baseline; border-bottom: 1px solid var(--rule-soft); }
   table.ex tr:last-child td { border-bottom: none; }
@@ -243,6 +254,23 @@
   }
   table.ex .dose { font-family: var(--mono); font-size: 0.75rem; white-space: nowrap; width: 1%; text-align: right; }
   table.ex .hold { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-soft); white-space: nowrap; width: 1%; }
+  table.ex .colhead {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-soft); white-space: nowrap;
+    text-align: right; padding-bottom: 0.5rem;
+  }
+
+  /* ---- progress bars ---- */
+  .pbar { margin: 0.9rem 0 1.6rem; }
+  .pbar-labels { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+  .pbar-labels strong { color: var(--ink); font-weight: 500; }
+  .pbar-track { position: relative; height: 10px; background: var(--rule-soft); border-radius: 5px; margin: 0 4px; }
+  .pbar-fill { position: absolute; inset: 0; background: linear-gradient(90deg, var(--ink), var(--cleared)); border-radius: 5px; }
+  .pbar-tick { position: absolute; top: -4px; width: 2px; height: 18px; border-left: 2px solid var(--paper); transform: translateX(-1px); }
+  .pbar-tick span {
+    position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+    font-size: 0.62rem; color: var(--ink-soft); font-family: var(--mono); white-space: nowrap;
+  }
 
   /* ---- notices ---- */
   .notice {
@@ -382,6 +410,7 @@
 <script type="module">
 import { buildPlan, setLibrary } from './src/index.mjs';
 import { ENUMS, PARQ_KEYS, SCOFF_KEYS } from './src/schema.mjs';
+import { bmi } from './src/anthropometry.mjs';
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) =>
@@ -442,21 +471,67 @@ const MEASURES = [
 $('measurements').innerHTML = MEASURES.map(([id, label, def]) => `
   <div class="row2">
     <div class="field"><label for="${id}">${esc(label)} (cm)</label>
-      <input type="number" id="${id}" value="${def}"></div>
+      <input type="number" id="${id}" value="${def}" placeholder="estimated"></div>
     <div class="field"><label for="${id}_target">${esc(label)} target</label>
       <input type="number" id="${id}_target" placeholder="auto"></div>
   </div>
   <p class="hint" id="${id}_hint" style="font-size:0.68rem;color:var(--ink-soft);margin:-0.3rem 0 0.6rem"></p>`).join('')
   + `<p style="font-size:0.7rem;color:var(--ink-soft);margin:0.2rem 0 0.6rem">
-       Targets auto-fill from your weight goal (edit any of them yourself —
-       once you do, that one stops auto-updating). The gap also auto-picks a
-       training focus area below, if you haven't chosen one yourself.
+       Current values are rough estimates from your age/sex/height/weight —
+       replace with your own tape measurement for accuracy. Targets auto-fill
+       from your weight goal. Edit either one directly and it stops
+       auto-updating; clear it to resume. The gap also auto-picks a training
+       focus area below, if you haven't chosen one yourself.
      </p>`;
 
-/* Targets auto-suggest from the weight goal until the user edits one directly. */
-document.querySelectorAll('[id$="_target"]').forEach((el) => {
-  el.addEventListener('input', () => { el.dataset.touched = el.value === '' ? '' : '1'; });
+/* Current values estimate from person info; targets estimate from the
+   weight goal — both stop auto-updating the moment the user edits them
+   directly, and resume if cleared back to empty. */
+MEASURES.forEach(([id]) => {
+  $(id).addEventListener('input', () => { $(id).dataset.touched = $(id).value === '' ? '' : '1'; });
+  $(`${id}_target`).addEventListener('input', (e) => { e.target.dataset.touched = e.target.value === '' ? '' : '1'; });
 });
+
+/**
+ * Rough population-average body-proportion estimate, anchored on the same
+ * waist-to-height bands the engine already uses for health-risk framing
+ * (src/anthropometry.mjs). Everything else is a typical adult proportion
+ * relative to that waist estimate — clearly a starting point, not a
+ * measurement, and always overridable.
+ */
+function waistRatioForBmi(b) {
+  if (b < 18.5) return 0.42;
+  if (b < 25) return 0.46;
+  if (b < 30) return 0.52;
+  if (b < 35) return 0.58;
+  if (b < 40) return 0.65;
+  return 0.72;
+}
+
+function estimateMeasurements({ weightKg, heightCm, sex }) {
+  if (!weightKg || !heightCm) return null;
+  const waistCm = Math.round(waistRatioForBmi(bmi(weightKg, heightCm)) * heightCm * 10) / 10;
+  const whr = sex === 'male' ? 0.88 : sex === 'female' ? 0.78 : 0.83;
+  return {
+    waistCm,
+    hipCm: Math.round((waistCm / whr) * 10) / 10,
+    bellyCm: waistCm,
+    thighCm: Math.round(waistCm * 0.62 * 10) / 10,
+    armCm: Math.round(waistCm * 0.33 * 10) / 10,
+  };
+}
+
+function updateMeasurementEstimates() {
+  const estimate = estimateMeasurements({
+    weightKg: num('weightKg'), heightCm: num('heightCm'), sex: $('sex').value,
+  });
+  if (!estimate) return;
+  for (const [id] of MEASURES) {
+    const el = $(id);
+    if (el.dataset.touched === '1') continue;
+    el.value = estimate[id];
+  }
+}
 
 function updateMeasurementSuggestions() {
   const weight = num('weightKg');
@@ -630,20 +705,45 @@ function milestoneTable(sim) {
   if (pts.length < 2) return '';
   const measureKeys = [...new Set(pts.flatMap((p) => Object.keys(p.measurements ?? {})))];
 
-  return `<table class="ex" style="margin-top:0.8rem">
-    <tr><td class="slot">week</td><td class="slot">weight</td>
-      ${measureKeys.map((k) => `<td class="slot">${esc(MEASURE_LABEL[k] ?? k)}</td>`).join('')}
-      <td class="slot">eat/day</td><td class="slot">maintenance</td></tr>
+  return `<div class="table-scroll"><table class="ex" style="margin-top:0.8rem">
+    <tr><td class="colhead">week</td><td class="colhead">weight</td>
+      ${measureKeys.map((k) => `<td class="colhead">${esc(MEASURE_LABEL[k] ?? k)}</td>`).join('')}
+      <td class="colhead">eat/day</td><td class="colhead">maintenance</td></tr>
     ${pts.map((p) => `<tr>
       <td class="dose">${p.week}</td>
       <td class="dose">${p.weightKg} kg</td>
       ${measureKeys.map((k) => `<td class="dose">${p.measurements?.[k] != null ? p.measurements[k] + ' cm' : '—'}</td>`).join('')}
       <td class="dose">${p.intakeKcal ?? '—'}</td>
       <td class="dose">${p.maintenanceKcal ?? '—'}</td>
-    </tr>`).join('')}</table>
+    </tr>`).join('')}</table></div>
   ${measureKeys.length ? `<p style="font-size:0.7rem;color:var(--ink-soft);margin:0.4rem 0 0">
     Measurement columns are proportional estimates from your projected weight loss — not something a specific exercise causes.
   </p>` : ''}`;
+}
+
+function pickCheckpoints(pts, valueGetter) {
+  if (!pts.length) return [];
+  const fracs = [0.25, 0.5, 0.75, 1];
+  const idxs = [...new Set(fracs.map((f) => Math.min(pts.length - 1, Math.round(f * (pts.length - 1)))))];
+  return idxs.map((i) => ({ week: pts[i].week, value: valueGetter(pts[i]) })).filter((c) => c.value != null);
+}
+
+/**
+ * A start-to-goal bar with week markers, instead of an XY line chart —
+ * easier to read at a glance. Markers cluster toward the goal end later in
+ * the plan because loss slows as maintenance calories fall, which shows the
+ * same "slows down" story the chart's dashed line shows, spatially instead.
+ */
+function progressBar(unit, startVal, goalVal, checkpoints) {
+  if (goalVal == null || startVal == null || !checkpoints.length) return '';
+  const pct = (v) => Math.max(0, Math.min(100, ((v - startVal) / (goalVal - startVal)) * 100));
+  return `<div class="pbar">
+    <div class="pbar-labels"><span><strong>${esc(startVal)}</strong>${esc(unit)} now</span><span><strong>${esc(goalVal)}</strong>${esc(unit)} goal</span></div>
+    <div class="pbar-track">
+      <div class="pbar-fill"></div>
+      ${checkpoints.map((c) => `<div class="pbar-tick" style="left:${pct(c.value).toFixed(1)}%" title="week ${c.week}: ${c.value}${unit}"><span>wk ${c.week}</span></div>`).join('')}
+    </div>
+  </div>`;
 }
 
 function forecastCard(f, input) {
@@ -653,13 +753,29 @@ function forecastCard(f, input) {
       : f.basis === 'beyond_horizon' ? `~${sim.finalWeightKg} kg by the end of this window`
         : 'No projection';
 
+  const pts = sim ? sim.trajectory.filter((p) => p.week === 0 || p.intakeKcal != null) : [];
+  const weightBar = input.goalWeightKg != null
+    ? progressBar(' kg', input.weightKg, input.goalWeightKg, pickCheckpoints(pts, (p) => p.weightKg))
+    : '';
+  const measureBars = MEASURES.map(([id, label]) => {
+    const start = input.measurements?.[id];
+    const target = input.measurementTargets?.[id];
+    if (start == null || target == null) return '';
+    const bar = progressBar(' cm', start, target, pickCheckpoints(pts, (p) => p.measurements?.[id]));
+    return bar ? `<p style="font-size:0.72rem;color:var(--ink-soft);margin:0 0 -0.6rem">${esc(label)}</p>${bar}` : '';
+  }).join('');
+
   return `<div class="card"><h3>Forecast</h3>
     <div class="grid" style="margin-bottom:0.6rem">
       ${stat('Outlook', BASIS_LABEL[f.basis] ?? f.basis)}
       ${f.basis !== 'no_goal' ? stat('Headline', headline) : ''}
     </div>
     <p style="margin:0 0 0.8rem;font-size:0.88rem">${esc(f.message)}</p>
+    ${weightBar || measureBars ? `<p style="font-size:0.72rem;color:var(--ink-soft);margin:0 0 -0.6rem">Weight</p>${weightBar}${measureBars}
+      <p style="font-size:0.7rem;color:var(--ink-soft);margin:0 0 1rem">Markers show projected week-by-week progress — bunched near the goal end because loss slows as you get lighter.</p>` : ''}
+    <details><summary style="cursor:pointer;font-size:0.72rem;color:var(--ink-soft)">Chart view</summary>
     ${tapeChart(f, input.weightKg, input.goalWeightKg)}
+    </details>
     ${f.naiveEstimateWeeks != null ? `<div class="grid" style="margin-top:1rem">
       ${stat('Straight-line estimate', f.naiveEstimateWeeks, ' wk')}
       ${stat('Realistic estimate', f.weeksToGoal ?? sim.stalledAtWeek ?? '—', ' wk', '', true)}
@@ -784,12 +900,12 @@ function render(r, input) {
       <div class="head"><span class="name">${esc(s.name)}</span>
         <span class="meta">${s.totalMinutes} min · ~${s.estimatedKcal} kcal</span></div>
       <p class="warm">Warm-up: ${s.warmup.map((w) => esc(w.name)).join(' · ')}</p>
-      <table class="ex">${s.exercises.map((e) => `<tr>
+      <div class="table-scroll"><table class="ex">${s.exercises.map((e) => `<tr>
         <td class="slot">${esc(e.slot)}</td>
         <td>${esc(e.name)}</td>
         <td class="dose">${e.sets}×${esc(e.reps)}</td>
         <td class="hold">${e.rotatesWith === 'each_session' ? 'rotates' : 'held'}</td>
-      </tr>`).join('')}</table>
+      </tr>`).join('')}</table></div>
     </div>`).join('')}
   </div>`);
 
@@ -803,6 +919,7 @@ let ready = false;
 
 function run() {
   if (!ready) return;
+  updateMeasurementEstimates();
   updateMeasurementSuggestions();
   updateMeasurementHints();
   const input = readForm();
