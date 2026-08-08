@@ -1,0 +1,4029 @@
+{
+  "version": 1,
+  "count": 196,
+  "vocabularies": {
+    "patterns": [
+      "arms",
+      "calf",
+      "conditioning",
+      "core",
+      "hinge",
+      "lunge",
+      "mobility",
+      "pull_h",
+      "pull_v",
+      "push_h",
+      "push_v",
+      "squat"
+    ],
+    "equipment": [
+      "ab_wheel",
+      "bands",
+      "barbell_rack",
+      "battle_ropes",
+      "bench",
+      "bicycle",
+      "box",
+      "cables",
+      "cardio_machines",
+      "dumbbells",
+      "jump_rope",
+      "kettlebell",
+      "machines",
+      "mat",
+      "none",
+      "pool",
+      "pull_up_bar",
+      "sled",
+      "sliders",
+      "trap_bar"
+    ],
+    "impact": [
+      "high",
+      "low",
+      "moderate"
+    ],
+    "tags": [
+      "accessory",
+      "beginner_friendly",
+      "compound",
+      "conditioning",
+      "core",
+      "deep_knee_flexion",
+      "isometric",
+      "mobility",
+      "needs_coaching",
+      "overhead",
+      "pelvic_floor_caution",
+      "spinal_flexion",
+      "spinal_load"
+    ]
+  },
+  "rotation_policy": {
+    "compound": "hold per 4-6 week block; progress load/reps within block",
+    "accessory": "rotate every 1-2 weeks",
+    "core": "rotate freely each session",
+    "conditioning": "rotate freely each session",
+    "mobility": "rotate freely; 4-6 items per warm-up"
+  },
+  "exercises": [
+    {
+      "id": "bw_squat",
+      "name": "Bodyweight Squat",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_bw",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "box_squat_chair",
+      "name": "Box Squat to Chair",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_bw",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "sumo_squat",
+      "name": "Sumo Squat",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_bw",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "prisoner_squat",
+      "name": "Prisoner Squat",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_bw",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "squat_pulse",
+      "name": "Squat Pulse",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_bw",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "wall_sit",
+      "name": "Wall Sit",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_iso",
+      "tags": [
+        "accessory",
+        "isometric"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "goblet_squat",
+      "name": "Goblet Squat",
+      "pattern": "squat",
+      "equipment": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_loaded",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "heels_elev_goblet",
+      "name": "Heels-Elevated Goblet Squat",
+      "pattern": "squat",
+      "equipment": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_loaded",
+      "tags": [
+        "compound",
+        "deep_knee_flexion"
+      ],
+      "requires": [],
+      "any_of": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "db_front_squat",
+      "name": "Dumbbell Front Squat",
+      "pattern": "squat",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_loaded",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_squat",
+      "name": "Banded Squat",
+      "pattern": "squat",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_loaded",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_back_squat",
+      "name": "Barbell Back Squat",
+      "pattern": "squat",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_front_squat",
+      "name": "Barbell Front Squat",
+      "pattern": "squat",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "zercher_squat",
+      "name": "Zercher Squat",
+      "pattern": "squat",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "pause_squat",
+      "name": "Tempo Pause Squat",
+      "pattern": "squat",
+      "equipment": [
+        "barbell_rack",
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_loaded",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "barbell_rack",
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "hack_squat",
+      "name": "Hack Squat Machine",
+      "pattern": "squat",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_machine",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "leg_press",
+      "name": "Leg Press",
+      "pattern": "squat",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_machine",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "smith_squat",
+      "name": "Smith Machine Squat",
+      "pattern": "squat",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_machine",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cossack_squat",
+      "name": "Cossack Squat",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "squat_uni",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "sissy_squat",
+      "name": "Sissy Squat",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "squat_bw",
+      "tags": [
+        "accessory",
+        "deep_knee_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "jump_squat",
+      "name": "Jump Squat",
+      "pattern": "squat",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "squat_plyo",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "glute_bridge",
+      "name": "Glute Bridge",
+      "pattern": "hinge",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "bridge",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "sl_glute_bridge",
+      "name": "Single-Leg Glute Bridge",
+      "pattern": "hinge",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "bridge",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "frog_pump",
+      "name": "Frog Pump",
+      "pattern": "hinge",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "bridge",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "banded_hip_thrust",
+      "name": "Banded Hip Thrust",
+      "pattern": "hinge",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "thrust",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_hip_thrust",
+      "name": "Dumbbell Hip Thrust",
+      "pattern": "hinge",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "thrust",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_hip_thrust",
+      "name": "Barbell Hip Thrust",
+      "pattern": "hinge",
+      "equipment": [
+        "barbell_rack",
+        "bench"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "thrust",
+      "tags": [
+        "compound",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "hip_thrust_machine",
+      "name": "Hip Thrust Machine",
+      "pattern": "hinge",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "thrust",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "kb_deadlift",
+      "name": "Kettlebell Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "kettlebell"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_loaded",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "kettlebell"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_rdl",
+      "name": "Dumbbell Romanian Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_loaded",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_rdl",
+      "name": "Barbell Romanian Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "sl_rdl",
+      "name": "Single-Leg Romanian Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "hinge_uni",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "conventional_dl",
+      "name": "Conventional Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "sumo_dl",
+      "name": "Sumo Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "trap_bar_dl",
+      "name": "Trap Bar Deadlift",
+      "pattern": "hinge",
+      "equipment": [
+        "trap_bar"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_barbell",
+      "tags": [
+        "compound",
+        "spinal_load"
+      ],
+      "requires": [
+        "trap_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "good_morning",
+      "name": "Good Morning",
+      "pattern": "hinge",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_barbell",
+      "tags": [
+        "accessory",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "kb_swing",
+      "name": "Kettlebell Swing",
+      "pattern": "hinge",
+      "equipment": [
+        "kettlebell"
+      ],
+      "difficulty": 2,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "hinge_ballistic",
+      "tags": [
+        "conditioning",
+        "needs_coaching",
+        "pelvic_floor_caution"
+      ],
+      "requires": [
+        "kettlebell"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cable_pull_through",
+      "name": "Cable Pull-Through",
+      "pattern": "hinge",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hinge_loaded",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "back_extension",
+      "name": "Back Extension",
+      "pattern": "hinge",
+      "equipment": [
+        "bench"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "extension",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "reverse_hyper",
+      "name": "Reverse Hyperextension",
+      "pattern": "hinge",
+      "equipment": [
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "extension",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "nordic_curl",
+      "name": "Assisted Nordic Hamstring Curl",
+      "pattern": "hinge",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ham_curl",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "slider_ham_curl",
+      "name": "Slider Hamstring Curl",
+      "pattern": "hinge",
+      "equipment": [
+        "sliders",
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ham_curl",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "sliders"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "seated_leg_curl",
+      "name": "Seated Leg Curl",
+      "pattern": "hinge",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ham_curl",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "lying_leg_curl",
+      "name": "Lying Leg Curl",
+      "pattern": "hinge",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ham_curl",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "reverse_lunge",
+      "name": "Reverse Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "lunge",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "forward_lunge",
+      "name": "Forward Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "lunge",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "walking_lunge",
+      "name": "Walking Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "none",
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "lunge",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [
+        "none",
+        "dumbbells"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "lateral_lunge",
+      "name": "Lateral Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "lunge",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "curtsy_lunge",
+      "name": "Curtsy Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "lunge",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "split_squat",
+      "name": "Split Squat",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "split",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "bulgarian_split_squat",
+      "name": "Bulgarian Split Squat",
+      "pattern": "lunge",
+      "equipment": [
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "split",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "deficit_rev_lunge",
+      "name": "Deficit Reverse Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "dumbbells",
+        "box"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "lunge",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells",
+        "box"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "step_up",
+      "name": "Step-Up",
+      "pattern": "lunge",
+      "equipment": [
+        "box",
+        "bench"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "step",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "box",
+        "bench"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "ecc_step_down",
+      "name": "Eccentric Step-Down",
+      "pattern": "lunge",
+      "equipment": [
+        "box"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "step",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "box"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "sl_leg_press",
+      "name": "Single-Leg Leg Press",
+      "pattern": "lunge",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "step",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "assisted_pistol",
+      "name": "Assisted Pistol Squat",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "split",
+      "tags": [
+        "accessory",
+        "deep_knee_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "jumping_lunge",
+      "name": "Jumping Lunge",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 3,
+      "impact": "high",
+      "unilateral": true,
+      "progression_family": "lunge_plyo",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "skater_hops",
+      "name": "Skater Hops",
+      "pattern": "lunge",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "high",
+      "unilateral": true,
+      "progression_family": "lunge_plyo",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "wall_pushup",
+      "name": "Wall Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "incline_pushup",
+      "name": "Incline Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none",
+        "bench"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "none",
+        "bench"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "knee_pushup",
+      "name": "Knee Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "pushup",
+      "name": "Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "wide_pushup",
+      "name": "Wide Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "diamond_pushup",
+      "name": "Diamond Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "decline_pushup",
+      "name": "Decline Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "bench"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "archer_pushup",
+      "name": "Archer Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "pushup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "scap_pushup",
+      "name": "Scapular Push-Up",
+      "pattern": "push_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pushup_prep",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "db_floor_press",
+      "name": "Dumbbell Floor Press",
+      "pattern": "push_h",
+      "equipment": [
+        "dumbbells",
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "press_h",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_bench_press",
+      "name": "Dumbbell Bench Press",
+      "pattern": "push_h",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "press_h",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "incline_db_press",
+      "name": "Incline Dumbbell Press",
+      "pattern": "push_h",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "press_h",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_bench_press",
+      "name": "Barbell Bench Press",
+      "pattern": "push_h",
+      "equipment": [
+        "barbell_rack",
+        "bench"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "press_h",
+      "tags": [
+        "compound",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "machine_chest_press",
+      "name": "Machine Chest Press",
+      "pattern": "push_h",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "press_h",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_chest_press",
+      "name": "Banded Chest Press",
+      "pattern": "push_h",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "press_h",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_fly",
+      "name": "Dumbbell Fly",
+      "pattern": "push_h",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "fly",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cable_fly",
+      "name": "Cable Chest Fly",
+      "pattern": "push_h",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "fly",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "pec_deck",
+      "name": "Pec Deck",
+      "pattern": "push_h",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "fly",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_ohp",
+      "name": "Banded Overhead Press",
+      "pattern": "push_v",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_shoulder_press",
+      "name": "Dumbbell Shoulder Press",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "seated_db_press",
+      "name": "Seated Dumbbell Press",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "arnold_press",
+      "name": "Arnold Press",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "half_kneel_press",
+      "name": "Half-Kneeling Single-Arm Press",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_ohp",
+      "name": "Barbell Overhead Press",
+      "pattern": "push_v",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "landmine_press",
+      "name": "Landmine Press",
+      "pattern": "push_v",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "ohp",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "machine_shoulder_press",
+      "name": "Machine Shoulder Press",
+      "pattern": "push_v",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ohp",
+      "tags": [
+        "compound",
+        "overhead",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "pike_pushup",
+      "name": "Pike Push-Up",
+      "pattern": "push_v",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pike",
+      "tags": [
+        "compound",
+        "overhead"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "lateral_raise",
+      "name": "Lateral Raise",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "delt_raise",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cable_lateral_raise",
+      "name": "Cable Lateral Raise",
+      "pattern": "push_v",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "delt_raise",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_lateral_raise",
+      "name": "Banded Lateral Raise",
+      "pattern": "push_v",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "delt_raise",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "front_raise",
+      "name": "Front Raise",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "delt_raise",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "upright_row",
+      "name": "Upright Row",
+      "pattern": "push_v",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "delt_raise",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "towel_row",
+      "name": "Doorway / Towel Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_bw",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "inverted_row",
+      "name": "Inverted Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_bw",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_seated_row",
+      "name": "Banded Seated Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_loaded",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_single_arm_row",
+      "name": "Single-Arm Dumbbell Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "row_loaded",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_bent_row",
+      "name": "Dumbbell Bent-Over Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_loaded",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "chest_supported_row",
+      "name": "Chest-Supported Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_loaded",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bb_bent_row",
+      "name": "Barbell Bent-Over Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "pendlay_row",
+      "name": "Pendlay Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_barbell",
+      "tags": [
+        "compound",
+        "spinal_load",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "meadows_row",
+      "name": "Meadows Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "barbell_rack"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "row_barbell",
+      "tags": [
+        "compound",
+        "needs_coaching"
+      ],
+      "requires": [
+        "barbell_rack"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "seated_cable_row",
+      "name": "Seated Cable Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_machine",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "machine_row",
+      "name": "Machine Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_machine",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "renegade_row",
+      "name": "Renegade Row",
+      "pattern": "pull_h",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "row_loaded",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "face_pull",
+      "name": "Face Pull",
+      "pattern": "pull_h",
+      "equipment": [
+        "cables",
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rear_delt",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "cables",
+        "bands"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "reverse_fly",
+      "name": "Reverse Fly",
+      "pattern": "pull_h",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rear_delt",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_pull_apart",
+      "name": "Band Pull-Apart",
+      "pattern": "pull_h",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rear_delt",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "prone_ytw",
+      "name": "Prone Y-T-W Raise",
+      "pattern": "pull_h",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rear_delt",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "lat_pulldown",
+      "name": "Lat Pulldown",
+      "pattern": "pull_v",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pulldown",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "straight_arm_pulldown",
+      "name": "Straight-Arm Pulldown",
+      "pattern": "pull_v",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pulldown",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "assisted_pullup_machine",
+      "name": "Assisted Pull-Up Machine",
+      "pattern": "pull_v",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pullup",
+      "tags": [
+        "compound",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "dead_hang",
+      "name": "Dead Hang",
+      "pattern": "pull_v",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pullup_prep",
+      "tags": [
+        "accessory",
+        "isometric"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "negative_pullup",
+      "name": "Negative Pull-Up",
+      "pattern": "pull_v",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pullup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_assisted_pullup",
+      "name": "Band-Assisted Pull-Up",
+      "pattern": "pull_v",
+      "equipment": [
+        "pull_up_bar",
+        "bands"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pullup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "pull_up_bar",
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "chinup",
+      "name": "Chin-Up",
+      "pattern": "pull_v",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pullup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "pullup",
+      "name": "Pull-Up",
+      "pattern": "pull_v",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "pullup",
+      "tags": [
+        "compound"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "band_curl",
+      "name": "Banded Biceps Curl",
+      "pattern": "arms",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "curl",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "db_curl",
+      "name": "Dumbbell Biceps Curl",
+      "pattern": "arms",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "curl",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "hammer_curl",
+      "name": "Hammer Curl",
+      "pattern": "arms",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "curl",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "concentration_curl",
+      "name": "Concentration Curl",
+      "pattern": "arms",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "curl",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cable_curl",
+      "name": "Cable Curl",
+      "pattern": "arms",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "curl",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "oh_tricep_ext",
+      "name": "Overhead Triceps Extension",
+      "pattern": "arms",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "tricep",
+      "tags": [
+        "accessory",
+        "overhead"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "tricep_kickback",
+      "name": "Triceps Kickback",
+      "pattern": "arms",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "tricep",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cable_pushdown",
+      "name": "Cable Triceps Pushdown",
+      "pattern": "arms",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "tricep",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bench_dip",
+      "name": "Bench Dip",
+      "pattern": "arms",
+      "equipment": [
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "tricep",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "close_grip_pushup",
+      "name": "Close-Grip Push-Up",
+      "pattern": "arms",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "tricep",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "skull_crusher",
+      "name": "Skull Crusher",
+      "pattern": "arms",
+      "equipment": [
+        "dumbbells",
+        "bench"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "tricep",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [
+        "dumbbells",
+        "bench"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "plank",
+      "name": "Forearm Plank",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "plank",
+      "tags": [
+        "core",
+        "isometric",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "plank_shoulder_tap",
+      "name": "Plank with Shoulder Tap",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "plank",
+      "tags": [
+        "core"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "body_saw",
+      "name": "Body Saw",
+      "pattern": "core",
+      "equipment": [
+        "sliders",
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "plank",
+      "tags": [
+        "core"
+      ],
+      "requires": [
+        "sliders"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "dead_bug",
+      "name": "Dead Bug",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "dead_bug",
+      "tags": [
+        "core",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "hollow_hold",
+      "name": "Hollow Body Hold",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hollow",
+      "tags": [
+        "core",
+        "isometric"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "leg_lowering",
+      "name": "Double-Leg Lowering",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hollow",
+      "tags": [
+        "core"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "reverse_crunch",
+      "name": "Reverse Crunch",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crunch",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "ab_wheel_rollout",
+      "name": "Ab Wheel Rollout",
+      "pattern": "core",
+      "equipment": [
+        "ab_wheel"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rollout",
+      "tags": [
+        "core",
+        "pelvic_floor_caution"
+      ],
+      "requires": [
+        "ab_wheel"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "hanging_knee_raise",
+      "name": "Hanging Knee Raise",
+      "pattern": "core",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hang_raise",
+      "tags": [
+        "core"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "hanging_leg_raise",
+      "name": "Hanging Leg Raise",
+      "pattern": "core",
+      "equipment": [
+        "pull_up_bar"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hang_raise",
+      "tags": [
+        "core"
+      ],
+      "requires": [
+        "pull_up_bar"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "side_plank",
+      "name": "Side Plank",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "side_plank",
+      "tags": [
+        "core",
+        "isometric",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "side_plank_dip",
+      "name": "Side Plank with Hip Dip",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "side_plank",
+      "tags": [
+        "core"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "copenhagen_plank",
+      "name": "Copenhagen Plank",
+      "pattern": "core",
+      "equipment": [
+        "mat",
+        "bench"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "side_plank",
+      "tags": [
+        "core"
+      ],
+      "requires": [],
+      "any_of": [
+        "mat",
+        "bench"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "pallof_press",
+      "name": "Pallof Press",
+      "pattern": "core",
+      "equipment": [
+        "cables",
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "anti_rotation",
+      "tags": [
+        "core",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "cables",
+        "bands"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "suitcase_carry",
+      "name": "Suitcase Carry",
+      "pattern": "core",
+      "equipment": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "carry",
+      "tags": [
+        "core",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "farmers_carry",
+      "name": "Farmer's Carry",
+      "pattern": "core",
+      "equipment": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "carry",
+      "tags": [
+        "core",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [
+        "dumbbells",
+        "kettlebell"
+      ],
+      "bodyweight": false
+    },
+    {
+      "id": "bird_dog",
+      "name": "Bird Dog",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "bird_dog",
+      "tags": [
+        "core",
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "cable_woodchopper",
+      "name": "Cable Woodchopper",
+      "pattern": "core",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "anti_rotation",
+      "tags": [
+        "core"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "russian_twist",
+      "name": "Russian Twist",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rotation",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "windshield_wipers",
+      "name": "Windshield Wipers",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 3,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "rotation",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "crunch",
+      "name": "Crunch",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crunch",
+      "tags": [
+        "core",
+        "spinal_flexion",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "bicycle_crunch",
+      "name": "Bicycle Crunch",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crunch",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "toe_touch",
+      "name": "Toe Touch",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crunch",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "v_up",
+      "name": "V-Up",
+      "pattern": "core",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crunch",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "cable_crunch",
+      "name": "Cable Crunch",
+      "pattern": "core",
+      "equipment": [
+        "cables"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crunch",
+      "tags": [
+        "core",
+        "spinal_flexion"
+      ],
+      "requires": [
+        "cables"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "mountain_climber",
+      "name": "Mountain Climber",
+      "pattern": "core",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "plank",
+      "tags": [
+        "core",
+        "conditioning"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "standing_calf_raise",
+      "name": "Standing Calf Raise",
+      "pattern": "calf",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "calf",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "sl_calf_raise",
+      "name": "Single-Leg Calf Raise",
+      "pattern": "calf",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "calf",
+      "tags": [
+        "accessory"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "seated_calf_raise",
+      "name": "Seated Calf Raise",
+      "pattern": "calf",
+      "equipment": [
+        "machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "calf",
+      "tags": [
+        "accessory",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "brisk_walk",
+      "name": "Brisk Walk",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "walk",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "incline_treadmill_walk",
+      "name": "Incline Treadmill Walk",
+      "pattern": "conditioning",
+      "equipment": [
+        "cardio_machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "walk",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "cardio_machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "stair_climbing",
+      "name": "Stair Climbing",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "stairs",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "stair_climber",
+      "name": "Stair Climber Machine",
+      "pattern": "conditioning",
+      "equipment": [
+        "cardio_machines"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "stairs",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [
+        "cardio_machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "hiking",
+      "name": "Hiking",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "walk",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "bike_steady",
+      "name": "Stationary Bike (Steady)",
+      "pattern": "conditioning",
+      "equipment": [
+        "cardio_machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "bike",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "cardio_machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "bike_intervals",
+      "name": "Stationary Bike Intervals",
+      "pattern": "conditioning",
+      "equipment": [
+        "cardio_machines"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "bike",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [
+        "cardio_machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cycling_outdoor",
+      "name": "Outdoor Cycling",
+      "pattern": "conditioning",
+      "equipment": [
+        "bicycle"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "bike",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [
+        "bicycle"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "elliptical",
+      "name": "Elliptical",
+      "pattern": "conditioning",
+      "equipment": [
+        "cardio_machines"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "elliptical",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "cardio_machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "rowing_machine",
+      "name": "Rowing Machine",
+      "pattern": "conditioning",
+      "equipment": [
+        "cardio_machines"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "row_erg",
+      "tags": [
+        "conditioning",
+        "needs_coaching"
+      ],
+      "requires": [
+        "cardio_machines"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "swimming",
+      "name": "Swimming",
+      "pattern": "conditioning",
+      "equipment": [
+        "pool"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "swim",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "pool"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "water_aerobics",
+      "name": "Water Aerobics",
+      "pattern": "conditioning",
+      "equipment": [
+        "pool"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "swim",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "pool"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "battle_ropes",
+      "name": "Battle Ropes",
+      "pattern": "conditioning",
+      "equipment": [
+        "battle_ropes"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "ropes",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [
+        "battle_ropes"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "sled_push",
+      "name": "Sled Push / Drag",
+      "pattern": "conditioning",
+      "equipment": [
+        "sled"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "sled",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [
+        "sled"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "shadow_boxing",
+      "name": "Shadow Boxing",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "boxing",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "bear_crawl",
+      "name": "Bear Crawl",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "crawl",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "squat_thrust",
+      "name": "Squat Thrust (No Jump)",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "burpee",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "dance_cardio",
+      "name": "Dance Cardio",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "dance",
+      "tags": [
+        "conditioning",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "step_aerobics",
+      "name": "Step Aerobics",
+      "pattern": "conditioning",
+      "equipment": [
+        "box"
+      ],
+      "difficulty": 2,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "dance",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [
+        "box"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "half_burpee",
+      "name": "Half Burpee",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "burpee",
+      "tags": [
+        "conditioning"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "jumping_jacks",
+      "name": "Jumping Jacks",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "jacks",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "high_knees",
+      "name": "High Knees",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "run_drill",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "butt_kicks",
+      "name": "Butt Kicks",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 2,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "run_drill",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "jump_rope",
+      "name": "Jump Rope",
+      "pattern": "conditioning",
+      "equipment": [
+        "jump_rope"
+      ],
+      "difficulty": 2,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "rope",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [
+        "jump_rope"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "burpee",
+      "name": "Burpee",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 3,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "burpee",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "box_jump",
+      "name": "Box Jump",
+      "pattern": "conditioning",
+      "equipment": [
+        "box"
+      ],
+      "difficulty": 3,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "plyo",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [
+        "box"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "sprint_intervals",
+      "name": "Sprint Intervals",
+      "pattern": "conditioning",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 3,
+      "impact": "high",
+      "unilateral": false,
+      "progression_family": "sprint",
+      "tags": [
+        "conditioning",
+        "pelvic_floor_caution"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "db_thruster",
+      "name": "Dumbbell Thruster",
+      "pattern": "conditioning",
+      "equipment": [
+        "dumbbells"
+      ],
+      "difficulty": 3,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "complex",
+      "tags": [
+        "conditioning",
+        "overhead"
+      ],
+      "requires": [
+        "dumbbells"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "kb_complex",
+      "name": "Kettlebell Complex",
+      "pattern": "conditioning",
+      "equipment": [
+        "kettlebell"
+      ],
+      "difficulty": 3,
+      "impact": "moderate",
+      "unilateral": false,
+      "progression_family": "complex",
+      "tags": [
+        "conditioning",
+        "needs_coaching"
+      ],
+      "requires": [
+        "kettlebell"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "cat_cow",
+      "name": "Cat-Cow",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "spine_mob",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "thoracic_rotation",
+      "name": "Thoracic Rotation",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "spine_mob",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "hip_90_90",
+      "name": "90/90 Hip Switch",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "hip_mob",
+      "tags": [
+        "mobility"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "worlds_greatest_stretch",
+      "name": "World's Greatest Stretch",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "hip_mob",
+      "tags": [
+        "mobility"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "hip_flexor_stretch",
+      "name": "Half-Kneeling Hip Flexor Stretch",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "hip_mob",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "ankle_rocks",
+      "name": "Ankle Rocks",
+      "pattern": "mobility",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "ankle_mob",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "leg_swings",
+      "name": "Leg Swings",
+      "pattern": "mobility",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "dynamic_warmup",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "arm_circles",
+      "name": "Arm Circles",
+      "pattern": "mobility",
+      "equipment": [
+        "none"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "dynamic_warmup",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "glute_bridge_march",
+      "name": "Glute Bridge March",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "glute_activation",
+      "tags": [
+        "mobility"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "banded_lateral_walk",
+      "name": "Banded Lateral Walk",
+      "pattern": "mobility",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "glute_activation",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "monster_walk",
+      "name": "Banded Monster Walk",
+      "pattern": "mobility",
+      "equipment": [
+        "bands"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": false,
+      "progression_family": "glute_activation",
+      "tags": [
+        "mobility"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "clamshell",
+      "name": "Clamshell",
+      "pattern": "mobility",
+      "equipment": [
+        "bands",
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "glute_activation",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [
+        "bands"
+      ],
+      "any_of": [],
+      "bodyweight": false
+    },
+    {
+      "id": "fire_hydrant",
+      "name": "Fire Hydrant",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "glute_activation",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    },
+    {
+      "id": "donkey_kick",
+      "name": "Donkey Kick",
+      "pattern": "mobility",
+      "equipment": [
+        "mat"
+      ],
+      "difficulty": 1,
+      "impact": "low",
+      "unilateral": true,
+      "progression_family": "glute_activation",
+      "tags": [
+        "mobility",
+        "beginner_friendly"
+      ],
+      "requires": [],
+      "any_of": [],
+      "bodyweight": true
+    }
+  ]
+}

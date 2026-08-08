@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fat-loss engine — preview harness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:      #16233A;
+    --ink-soft: #5A6B85;
+    --paper:    #F6F7F9;
+    --card:     #FFFFFF;
+    --rule:     #D5DBE3;
+    --rule-soft:#E8ECF1;
+    --cleared:  #0F5F58;
+    --advisory: #9A6A10;
+    --block:    #8E1F2B;
+    --tape:     #C8D0DB;
+
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --cond: 'IBM Plex Sans Condensed', system-ui, sans-serif;
+    --body: 'IBM Plex Sans', system-ui, sans-serif;
+
+    --gap: 1.5rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- masthead ---- */
+  header.masthead {
+    border-bottom: 1px solid var(--ink);
+    padding: 1.25rem 1.5rem 1rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .masthead h1 {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .masthead .sub {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.04em;
+  }
+  .masthead .spacer { flex: 1; }
+
+  /* ---- layout ---- */
+  .shell {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 0;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .shell { grid-template-columns: 1fr; }
+    aside.controls { border-right: none !important; border-bottom: 1px solid var(--rule); }
+  }
+
+  aside.controls {
+    padding: var(--gap);
+    border-right: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  main.readout { padding: var(--gap); min-width: 0; }
+
+  /* ---- form ---- */
+  .eyebrow {
+    font-family: var(--cond);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 1.5rem 0 0.6rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .eyebrow:first-child { margin-top: 0; }
+
+  .field { margin-bottom: 0.7rem; }
+  .field > label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.2rem;
+  }
+  input[type=number], select {
+    width: 100%;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    padding: 0.4rem 0.5rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--card);
+    color: var(--ink);
+  }
+  input:focus-visible, select:focus-visible, button:focus-visible, label:focus-within {
+    outline: 2px solid var(--ink);
+    outline-offset: 1px;
+  }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+
+  .checks { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+  .checks label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    border: 1px solid var(--rule);
+    padding: 0.22rem 0.45rem;
+    border-radius: 2px;
+    cursor: pointer;
+    user-select: none;
+    background: var(--card);
+  }
+  .checks input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .checks label:has(input:checked) {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+
+  /* ---- status band ---- */
+  .band {
+    border: 1px solid var(--ink);
+    border-left-width: 5px;
+    background: var(--card);
+    padding: 0.9rem 1.1rem;
+    margin-bottom: var(--gap);
+  }
+  .band.cleared  { border-left-color: var(--cleared); }
+  .band.advisory { border-left-color: var(--advisory); }
+  .band.block    { border-left-color: var(--block); }
+  .band .status {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .band h2 {
+    font-family: var(--cond);
+    font-weight: 700;
+    font-size: 1.15rem;
+    margin: 0.15rem 0 0;
+  }
+  .band.block h2    { color: var(--block); }
+  .band.advisory h2 { color: var(--advisory); }
+  .band.cleared h2  { color: var(--cleared); }
+
+  /* ---- cards ---- */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 1.1rem 1.2rem;
+    margin-bottom: var(--gap);
+  }
+  .card > h3 {
+    font-family: var(--cond);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.9rem;
+  }
+
+  .grid { display: grid; gap: 1rem 1.4rem; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .stat .k {
+    font-family: var(--cond);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: block;
+  }
+  .stat .v {
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+  }
+  .stat .u { font-size: 0.72rem; color: var(--ink-soft); font-family: var(--mono); }
+  .stat .note { font-size: 0.7rem; color: var(--ink-soft); display: block; margin-top: 0.1rem; }
+  .stat .v.warn { color: var(--advisory); }
+
+  /* ---- gates ---- */
+  ul.gates { list-style: none; margin: 0; padding: 0; }
+  ul.gates li {
+    padding: 0.6rem 0 0.6rem 0.8rem;
+    border-left: 3px solid var(--rule);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  ul.gates li:last-child { border-bottom: none; }
+  ul.gates li.block    { border-left-color: var(--block); }
+  ul.gates li.clearance{ border-left-color: var(--advisory); }
+  ul.gates li.advisory { border-left-color: var(--tape); }
+  ul.gates .sev {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  ul.gates li.block .sev { color: var(--block); }
+  ul.gates .msg { display: block; font-size: 0.86rem; }
+  ul.gates .act { display: block; font-size: 0.8rem; color: var(--ink-soft); font-style: italic; margin-top: 0.15rem; }
+
+  /* ---- sessions ---- */
+  .session { border-top: 1px solid var(--rule); padding-top: 0.8rem; margin-top: 0.8rem; }
+  .session:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+  .session .head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .session .name { font-family: var(--cond); font-weight: 700; font-size: 0.95rem; }
+  .session .meta { font-family: var(--mono); font-size: 0.68rem; color: var(--ink-soft); }
+  .session .warm { font-size: 0.75rem; color: var(--ink-soft); margin: 0.3rem 0 0.5rem; }
+  table.ex { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  table.ex td { padding: 0.28rem 0.4rem 0.28rem 0; vertical-align: baseline; border-bottom: 1px solid var(--rule-soft); }
+  table.ex tr:last-child td { border-bottom: none; }
+  table.ex .slot {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--ink-soft); white-space: nowrap; width: 1%;
+  }
+  table.ex .dose { font-family: var(--mono); font-size: 0.75rem; white-space: nowrap; width: 1%; text-align: right; }
+  table.ex .hold { font-family: var(--mono); font-size: 0.62rem; color: var(--ink-soft); white-space: nowrap; width: 1%; }
+
+  /* ---- notices ---- */
+  .notice {
+    border-left: 3px solid var(--advisory);
+    padding: 0.5rem 0 0.5rem 0.75rem;
+    margin-bottom: 0.7rem;
+    font-size: 0.83rem;
+  }
+  .notice .code {
+    font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--advisory); display: block;
+  }
+  .notice ul { margin: 0.3rem 0 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: 0.8rem; }
+
+  .foot {
+    font-size: 0.75rem; color: var(--ink-soft);
+    border-top: 1px solid var(--rule); padding-top: 0.8rem; font-style: italic;
+  }
+  /* SVG cannot resolve var() inside presentation attributes like stroke="",
+     so every colour and face is applied through CSS instead. */
+  svg.tape text        { font-family: var(--mono); font-size: 9px; fill: var(--ink-soft); }
+  svg.tape .axis       { stroke: var(--ink); stroke-width: 1; }
+  svg.tape .tick       { stroke: var(--tape); stroke-width: 1; }
+  svg.tape .goal       { stroke: var(--cleared); stroke-width: 1; stroke-dasharray: 2 4; }
+  svg.tape text.goal   { fill: var(--cleared); }
+  svg.tape .naive      { stroke: var(--block); stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.75; }
+  svg.tape .curve      { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+  svg.tape .dot-start  { fill: var(--ink); }
+  svg.tape .dot-end    { fill: var(--cleared); }
+  .legend { font-size: 0.78rem; color: var(--ink-soft); margin: 0.4rem 0 0; }
+  .legend .sim   { color: var(--ink); font-weight: 600; }
+  .legend .naive { color: var(--block); }
+
+  .err {
+    font-family: var(--mono); font-size: 0.8rem; color: var(--block);
+    background: #fff; border: 1px solid var(--block); padding: 1rem; white-space: pre-wrap;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .band, .card { animation: rise 0.24s ease both; }
+    @keyframes rise { from { opacity: 0; transform: translateY(4px); } }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <h1>Fat-loss engine</h1>
+  <span class="sub">preview harness &middot; drives <code>src/index.mjs</code> unmodified</span>
+  <span class="spacer"></span>
+  <span class="sub" id="libinfo">loading library…</span>
+</header>
+
+<div class="shell">
+  <aside class="controls">
+    <div class="eyebrow">Person</div>
+    <div class="row2">
+      <div class="field"><label for="age">Age</label><input type="number" id="age" value="31"></div>
+      <div class="field"><label for="sex">Sex</label>
+        <select id="sex"><option value="female">female</option><option value="male">male</option><option value="unspecified">unspecified</option></select>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="weightKg">Weight (kg)</label><input type="number" id="weightKg" value="82" step="0.5"></div>
+      <div class="field"><label for="heightCm">Height (cm)</label><input type="number" id="heightCm" value="164"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label for="goalWeightKg">Goal (kg)</label><input type="number" id="goalWeightKg" value="68" step="0.5"></div>
+      <div class="field"><label for="timeframeWeeks">Weeks</label><input type="number" id="timeframeWeeks" value="14"></div>
+    </div>
+
+    <div class="eyebrow">Measurements</div>
+    <div id="measurements"></div>
+
+    <div class="eyebrow">Training</div>
+    <div class="field"><label>Days/week</label>
+      <div class="checks" id="daysPerWeek-group"></div>
+    </div>
+    <div class="field"><label for="minutesPerSession">Min/session</label><input type="number" id="minutesPerSession" value="45"></div>
+    <div class="field"><label for="experience">Experience</label>
+      <select id="experience"><option>none</option><option selected>beginner</option><option>intermediate</option><option>advanced</option></select>
+    </div>
+    <div class="field"><label for="occupationActivity">Daily activity</label>
+      <select id="occupationActivity"><option selected>sedentary</option><option>light</option><option>active</option><option>very_active</option></select>
+    </div>
+    <div class="field"><label for="week">Programme week</label><input type="number" id="week" value="1" min="1" max="52"></div>
+    <div class="field"><label for="emphasis">Focus area</label>
+      <select id="emphasis"></select>
+      <span class="note" style="font-size:0.7rem;color:var(--ink-soft);display:block;margin-top:0.2rem">
+        Adds extra work for this area when time allows. Can't target fat loss to one body part — only the muscle work.
+      </span>
+    </div>
+
+    <div class="eyebrow">Equipment</div>
+    <div class="field"><label>Preset</label>
+      <div class="checks" id="locpreset-group"></div>
+    </div>
+    <div class="checks" id="equipment"></div>
+
+    <div class="eyebrow">Health</div>
+    <div class="checks" id="conditions"></div>
+    <div class="checks" id="flags" style="margin-top:0.4rem"></div>
+
+    <div class="eyebrow">Injuries</div>
+    <div class="checks" id="injuries"></div>
+
+    <div class="eyebrow">Screens</div>
+    <div class="checks" id="parq"></div>
+    <div class="checks" id="scoff" style="margin-top:0.4rem"></div>
+  </aside>
+
+  <main class="readout" id="readout"></main>
+</div>
+
+<script type="module">
+import { buildPlan, setLibrary } from './src/index.mjs';
+import { ENUMS, PARQ_KEYS, SCOFF_KEYS } from './src/schema.mjs';
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+/* ---------- build the checkbox groups from the engine's own enums ---------- */
+
+const EQUIP = ['bands', 'dumbbells', 'kettlebell', 'bench', 'box', 'pull_up_bar',
+  'barbell_rack', 'cables', 'machines', 'cardio_machines'];
+const HOME_EQUIPMENT = ['bands', 'dumbbells', 'kettlebell', 'bench', 'pull_up_bar', 'box'];
+const GYM_EQUIPMENT = EQUIP;
+const CONDS = ['pcos', 'insulin_resistance', 'type2_diabetes', 'hypothyroid',
+  'hypertension', 'cardiac', 'type1_diabetes', 'chronic_kidney_disease',
+  'eating_disorder_history'];
+const FLAGS = [
+  ['pregnant', 'pregnant'],
+  ['breastfeeding', 'breastfeeding'],
+  ['pelvicFloorSymptoms', 'pelvic floor'],
+];
+const INJ = ['knee', 'shoulder', 'low_back', 'neck', 'wrist', 'ankle', 'hip'];
+
+function chips(host, items, name, preset = []) {
+  host.innerHTML = items.map(([v, label]) => `
+    <label title="${esc(v)}">
+      <input type="checkbox" name="${name}" value="${esc(v)}" ${preset.includes(v) ? 'checked' : ''}>
+      ${esc(label)}
+    </label>`).join('');
+}
+
+function radios(host, items, name, selected) {
+  host.innerHTML = items.map(([v, label]) => `
+    <label title="${esc(v)}">
+      <input type="radio" name="${name}" value="${esc(v)}" ${v === selected ? 'checked' : ''}>
+      ${esc(label)}
+    </label>`).join('');
+}
+
+chips($('equipment'), EQUIP.map((e) => [e, e.replace(/_/g, ' ')]), 'equipment', ['dumbbells', 'bands']);
+chips($('conditions'), CONDS.map((c) => [c, c.replace(/_/g, ' ')]), 'conditions', ['pcos', 'insulin_resistance']);
+chips($('flags'), FLAGS, 'flags');
+chips($('injuries'), INJ.map((i) => [i, i.replace(/_/g, ' ')]), 'injuries');
+chips($('parq'), PARQ_KEYS.map((k) => [k, 'PAR-Q: ' + k.replace(/([A-Z])/g, ' $1').toLowerCase()]), 'parq');
+chips($('scoff'), SCOFF_KEYS.map((k) => [k, 'SCOFF: ' + k.replace(/([A-Z])/g, ' $1').toLowerCase()]), 'scoff');
+const MEASURES = [
+  ['waistCm', 'Waist', 92],
+  ['hipCm', 'Hip', 106],
+  ['bellyCm', 'Belly', 96],
+  ['thighCm', 'Thigh', 58],
+  ['armCm', 'Arm', 30],
+];
+
+$('measurements').innerHTML = MEASURES.map(([id, label, def]) => `
+  <div class="row2">
+    <div class="field"><label for="${id}">${esc(label)} (cm)</label>
+      <input type="number" id="${id}" value="${def}"></div>
+    <div class="field"><label for="${id}_target">${esc(label)} target</label>
+      <input type="number" id="${id}_target" placeholder="optional"></div>
+  </div>`).join('')
+  + `<p style="font-size:0.7rem;color:var(--ink-soft);margin:0.2rem 0 0.6rem">
+       Set a target below the current value to auto-pick a training focus
+       area (largest gap wins) if you haven't chosen one below.
+     </p>`;
+
+radios($('locpreset-group'), [['home', 'home'], ['gym', 'gym']], 'locpreset', 'home');
+radios($('daysPerWeek-group'), [1, 2, 3, 4, 5, 6, 7].map((n) => [n, n]), 'daysPerWeek', 3);
+$('emphasis').innerHTML = ENUMS.emphasis
+  .map((e) => `<option value="${esc(e)}">${esc(e === 'none' ? 'none — balanced' : e)}</option>`).join('');
+
+document.querySelectorAll('input[name="locpreset"]').forEach((el) => {
+  el.addEventListener('change', () => {
+    setChecks('equipment', el.value === 'home' ? HOME_EQUIPMENT : GYM_EQUIPMENT);
+    run();
+  });
+});
+
+const checked = (name) => [...document.querySelectorAll(`input[name="${name}"]:checked`)]
+  .map((el) => el.value);
+
+const radioValue = (name) => document.querySelector(`input[name="${name}"]:checked`)?.value;
+
+const num = (id) => {
+  const v = $(id).value.trim();
+  return v === '' ? null : Number(v);
+};
+
+function readForm() {
+  const flags = checked('flags');
+  const boolMap = (keys) => Object.fromEntries(keys.map((k) => [k, true]));
+  return {
+    age: num('age'),
+    sex: $('sex').value,
+    weightKg: num('weightKg'),
+    heightCm: num('heightCm'),
+    goalWeightKg: num('goalWeightKg'),
+    timeframeWeeks: num('timeframeWeeks'),
+    occupationActivity: $('occupationActivity').value,
+    daysPerWeek: Number(radioValue('daysPerWeek') ?? 3),
+    minutesPerSession: num('minutesPerSession'),
+    experience: $('experience').value,
+    emphasis: $('emphasis').value,
+    locations: [radioValue('locpreset') ?? 'home'],
+    equipment: checked('equipment'),
+    measurements: {
+      waistCm: num('waistCm'), hipCm: num('hipCm'), bellyCm: num('bellyCm'),
+      thighCm: num('thighCm'), armCm: num('armCm'),
+    },
+    measurementTargets: {
+      waistCm: num('waistCm_target'), hipCm: num('hipCm_target'), bellyCm: num('bellyCm_target'),
+      thighCm: num('thighCm_target'), armCm: num('armCm_target'),
+    },
+    health: {
+      pregnant: flags.includes('pregnant'),
+      breastfeeding: flags.includes('breastfeeding'),
+      pelvicFloorSymptoms: flags.includes('pelvicFloorSymptoms'),
+      conditions: checked('conditions'),
+      injuries: checked('injuries'),
+      parq: boolMap(checked('parq')),
+      scoff: boolMap(checked('scoff')),
+      cycleStatus: 'irregular',
+    },
+    dietary: { pattern: 'omnivore' },
+    seed: 'harness',
+  };
+}
+
+function setChecks(name, values) {
+  document.querySelectorAll(`input[name="${name}"]`).forEach((el) => {
+    el.checked = values.includes(el.value);
+  });
+}
+
+/* ---------- the signature element: a tape-measure trajectory ---------- */
+
+function tapeChart(forecast, startWeight, goalWeight) {
+  const sim = forecast.simulation;
+  const pts = sim.trajectory;
+  if (pts.length < 2) return '';
+
+  const W = 760, H = 210, padL = 46, padR = 22, padT = 18, padB = 34;
+  const maxWeek = pts.at(-1).week || 1;
+  const weights = pts.map((p) => p.weightKg);
+  const lo = Math.min(...weights, goalWeight ?? Infinity) - 1;
+  const hi = Math.max(...weights) + 1;
+
+  const x = (w) => padL + (w / maxWeek) * (W - padL - padR);
+  const y = (kg) => padT + (1 - (kg - lo) / (hi - lo)) * (H - padT - padB);
+
+  const path = pts.map((p, i) =>
+    `${i ? 'L' : 'M'}${x(p.week).toFixed(1)},${y(p.weightKg).toFixed(1)}`).join('');
+
+  // The straight line most calculators draw, shown for contrast.
+  const naive = forecast.naiveEstimateWeeks;
+  const naiveLine = (naive && goalWeight)
+    ? `<line class="naive" x1="${x(0)}" y1="${y(startWeight)}"
+         x2="${x(Math.min(naive, maxWeek))}" y2="${y(goalWeight)}"/>`
+    : '';
+
+  // Tape ticks: a small mark every week, a tall labelled one every four.
+  let ticks = '';
+  for (let w = 0; w <= maxWeek; w++) {
+    const tall = w % 4 === 0;
+    ticks += `<line class="tick" x1="${x(w).toFixed(1)}" y1="${H - padB}"
+                x2="${x(w).toFixed(1)}" y2="${H - padB + (tall ? 9 : 4)}"/>`;
+    if (tall && w > 0) {
+      ticks += `<text x="${x(w).toFixed(1)}" y="${H - padB + 22}" text-anchor="middle">${w}</text>`;
+    }
+  }
+
+  const goalLine = goalWeight
+    ? `<line class="goal" x1="${padL}" y1="${y(goalWeight)}" x2="${W - padR}" y2="${y(goalWeight)}"/>
+       <text class="goal" x="${W - padR}" y="${y(goalWeight) - 5}" text-anchor="end">goal ${goalWeight}kg</text>`
+    : '';
+
+  const yLabels = [hi, (hi + lo) / 2, lo].map((kg) =>
+    `<text x="${padL - 8}" y="${(y(kg) + 3).toFixed(1)}" text-anchor="end">${kg.toFixed(0)}</text>`).join('');
+
+  return `
+  <svg class="tape" viewBox="0 0 ${W} ${H}" width="100%" role="img"
+       aria-label="Projected weight across ${maxWeek} weeks. Simulated curve compared with a straight-line estimate.">
+    <line class="axis" x1="${padL}" y1="${H - padB}" x2="${W - padR}" y2="${H - padB}"/>
+    ${ticks}${yLabels}${goalLine}${naiveLine}
+    <path class="curve" d="${path}"/>
+    <circle class="dot-start" cx="${x(0)}" cy="${y(startWeight)}" r="3.5"/>
+    <circle class="dot-end" cx="${x(pts.at(-1).week)}" cy="${y(pts.at(-1).weightKg)}" r="3.5"/>
+    <text x="${padL}" y="${H - 4}">weeks</text>
+  </svg>
+  <p class="legend">
+    <span class="sim">solid</span> = simulated, with maintenance falling as weight drops
+    &nbsp;·&nbsp; <span class="naive">dashed</span> = the straight line most calculators show
+  </p>`;
+}
+
+const BASIS_LABEL = {
+  no_goal: 'No target set',
+  unreachable: 'Not reachable at this activity level',
+  beyond_horizon: 'Longer than the simulation window',
+  simulated: 'Week-by-week simulation',
+};
+
+function milestoneTable(sim) {
+  const pts = sim.trajectory.filter((p) => p.week === 0 || p.intakeKcal != null);
+  if (pts.length < 2) return '';
+  return `<table class="ex" style="margin-top:0.8rem">
+    <tr><td class="slot">week</td><td class="slot">weight</td>
+      <td class="slot">eat/day</td><td class="slot">maintenance</td></tr>
+    ${pts.map((p) => `<tr>
+      <td class="dose">${p.week}</td>
+      <td class="dose">${p.weightKg} kg</td>
+      <td class="dose">${p.intakeKcal ?? '—'}</td>
+      <td class="dose">${p.maintenanceKcal ?? '—'}</td>
+    </tr>`).join('')}</table>`;
+}
+
+function forecastCard(f, input) {
+  const sim = f.simulation;
+  const headline = f.basis === 'simulated' ? `${f.weeksToGoal} weeks to goal`
+    : f.basis === 'unreachable' ? `Plateaus around ${sim.finalWeightKg} kg`
+      : f.basis === 'beyond_horizon' ? `~${sim.finalWeightKg} kg by the end of this window`
+        : 'No projection';
+
+  return `<div class="card"><h3>Forecast</h3>
+    <div class="grid" style="margin-bottom:0.6rem">
+      ${stat('Outlook', BASIS_LABEL[f.basis] ?? f.basis)}
+      ${f.basis !== 'no_goal' ? stat('Headline', headline) : ''}
+    </div>
+    <p style="margin:0 0 0.8rem;font-size:0.88rem">${esc(f.message)}</p>
+    ${tapeChart(f, input.weightKg, input.goalWeightKg)}
+    ${f.naiveEstimateWeeks != null ? `<div class="grid" style="margin-top:1rem">
+      ${stat('Straight-line estimate', f.naiveEstimateWeeks, ' wk')}
+      ${stat('Realistic estimate', f.weeksToGoal ?? sim.stalledAtWeek ?? '—', ' wk', '', true)}
+      ${f.optimismWeeks > 0 ? stat('Extra time needed', '+' + f.optimismWeeks, ' wk') : ''}
+    </div>` : ''}
+    ${sim ? milestoneTable(sim) : ''}
+  </div>`;
+}
+
+/* ---------- render ---------- */
+
+const stat = (k, v, u = '', note = '', warn = false) => `
+  <div class="stat"><span class="k">${esc(k)}</span>
+    <span class="v${warn ? ' warn' : ''}">${esc(v)}<span class="u">${esc(u)}</span></span>
+    ${note ? `<span class="note">${esc(note)}</span>` : ''}</div>`;
+
+function render(r, input) {
+  const out = [];
+
+  if (r.status === 'invalid_input') {
+    out.push(`<div class="band block"><span class="status">rejected</span>
+      <h2>Input needs fixing</h2></div>
+      <div class="card"><h3>Validation</h3><ul class="gates">${
+        r.errors.map((e) => `<li class="block"><span class="sev">${esc(e.field)}</span>
+          <span class="msg">${esc(e.message)}</span></li>`).join('')}</ul></div>`);
+    return out.join('');
+  }
+
+  const kind = r.status === 'refer_clinician' ? 'block'
+    : r.status === 'clearance_required' ? 'block'
+      : r.status === 'ok_with_advisories' ? 'advisory' : 'cleared';
+
+  const headline = {
+    refer_clinician: 'Referred — no plan produced',
+    clearance_required: 'Medical clearance needed first',
+    ok_with_advisories: 'Cleared, with advisories',
+    ok: 'Cleared',
+  }[r.status];
+
+  out.push(`<div class="band ${kind}">
+    <span class="status">status · ${esc(r.status)}</span>
+    <h2>${esc(headline)}</h2>
+    ${r.nutrition === null
+      ? `<p style="margin:0.5rem 0 0;font-size:0.86rem">
+           This payload contains no calorie target, no macros and no programme.
+           Those branches are unreachable, not hidden.</p>` : ''}
+  </div>`);
+
+  /* body metrics */
+  const b = r.body;
+  out.push(`<div class="card"><h3>Body</h3><div class="grid">
+    ${stat('BMI', b.bmi, '', b.bmiCategory.replace(/_/g, ' '))}
+    ${b.waistToHeight ? stat('Waist ÷ height', b.waistToHeight, '', (b.waistToHeightBand || '').replace(/_/g, ' '), b.waistToHeightBand !== 'healthy') : ''}
+    ${b.waistToHip ? stat('Waist ÷ hip', b.waistToHip, '', (b.waistToHipBand || '').replace(/_/g, ' '), b.waistToHipBand !== 'healthy') : ''}
+    ${b.bodyFatPct ? stat('Body fat', b.bodyFatPct, '%', `range ${b.bodyFatRange[0]}–${b.bodyFatRange[1]}%`) : ''}
+    ${stat('Healthy range', `${b.healthyWeightRangeKg[0]}–${b.healthyWeightRangeKg[1]}`, 'kg')}
+  </div></div>`);
+
+  /* gates */
+  if (r.gates?.length) {
+    out.push(`<div class="card"><h3>Screening — ${r.gates.length} gate${r.gates.length > 1 ? 's' : ''} tripped</h3>
+      <ul class="gates">${r.gates.map((g) => `<li class="${esc(g.severity)}">
+        <span class="sev">${esc(g.severity)} · ${esc(g.code)}</span>
+        <span class="msg">${esc(g.message)}</span>
+        <span class="act">${esc(g.action)}</span></li>`).join('')}</ul></div>`);
+  }
+
+  if (r.nutrition === null) {
+    out.push(`<p class="foot">${esc(r.disclaimer)}</p>`);
+    return out.join('');
+  }
+
+  /* forecast */
+  if (r.forecast) {
+    out.push(forecastCard(r.forecast, input));
+  }
+
+  /* nutrition */
+  const n = r.nutrition;
+  out.push(`<div class="card"><h3>Energy &amp; macros</h3><div class="grid">
+    ${stat('BMR', n.bmrKcal, ' kcal')}
+    ${stat('Maintenance', n.maintenanceKcal, ' kcal', `NEAT ${n.expenditureBreakdown.neatKcal} + training ${n.expenditureBreakdown.exerciseKcalPerDay}`)}
+    ${stat('Eat', n.intakeKcal, ' kcal', `deficit ${n.dailyDeficitKcal} (${n.deficitPctOfTdee}%)`)}
+    ${stat('Rate', n.achievableRatePctPerWeek, '%/wk', n.reducedFromRequest ? 'reduced from request' : 'as requested', n.reducedFromRequest)}
+    ${stat('Protein', n.macros.proteinG.target, ' g', `${n.macros.proteinPerKgUsed}/kg of ${n.macros.proteinReferenceWeightKg}kg ${n.macros.proteinReferenceMethod.replace(/_/g, ' ')}`)}
+    ${stat('Fat', n.macros.fatG.target, ' g', `min ${n.macros.fatG.min}`)}
+    ${stat('Carbs', n.macros.carbG.target, ' g')}
+    ${stat('Fibre', n.macros.fibreG, ' g')}
+  </div>
+  ${n.clamps.length ? `<p style="font-family:var(--mono);font-size:0.7rem;color:var(--advisory);margin:0.9rem 0 0">
+    clamps applied: ${n.clamps.map(esc).join(' · ')}</p>` : ''}
+  </div>`);
+
+  if (n.recommendations?.length) {
+    out.push(`<div class="card"><h3>What to do about it</h3>
+      ${n.recommendations.map((x) => `<div class="notice">
+        <span class="code">${esc(x.code)}</span>${esc(x.message)}
+        ${x.actions?.length ? `<ul>${x.actions.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>` : ''}
+      </div>`).join('')}</div>`);
+  }
+
+  /* programme */
+  const p = r.programme;
+  out.push(`<div class="card">
+    <h3>Week ${p.week} · block ${p.blockIndex} · ${p.poolSize} exercises eligible · rotates in ${p.weeksUntilRotation} wk</h3>
+    ${p.warnings.length ? `<div style="margin-bottom:1rem">${p.warnings.map((w) => `
+      <div class="notice"><span class="code">${esc(w.code)} · ${esc(w.pattern)}</span>${esc(w.message)}</div>`).join('')}</div>` : ''}
+    ${p.equipmentNudge?.length ? `<div class="notice" style="border-left-color:var(--cleared)">
+      <span class="code" style="color:var(--cleared)">equipment</span>
+      ${p.equipmentNudge.map((o) => `Adding <strong>${esc(o.item.replace(/_/g, ' '))}</strong> would unlock
+        ${o.additionalExercises} more exercises${o.unlocksPatterns.length
+          ? ` and open ${esc(o.unlocksPatterns.join(', '))}, currently impossible` : ''}.`).join('<br>')}
+    </div>` : ''}
+    ${p.emphasisNote ? `<div class="notice">
+      <span class="code">focus · ${esc(p.emphasisNote.area)}</span>${esc(p.emphasisNote.message)}
+    </div>` : ''}
+    ${p.sessions.map((s) => `<div class="session">
+      <div class="head"><span class="name">${esc(s.name)}</span>
+        <span class="meta">${s.totalMinutes} min · ~${s.estimatedKcal} kcal</span></div>
+      <p class="warm">Warm-up: ${s.warmup.map((w) => esc(w.name)).join(' · ')}</p>
+      <table class="ex">${s.exercises.map((e) => `<tr>
+        <td class="slot">${esc(e.slot)}</td>
+        <td>${esc(e.name)}</td>
+        <td class="dose">${e.sets}×${esc(e.reps)}</td>
+        <td class="hold">${e.rotatesWith === 'each_session' ? 'rotates' : 'held'}</td>
+      </tr>`).join('')}</table>
+    </div>`).join('')}
+  </div>`);
+
+  out.push(`<p class="foot">${esc(r.disclaimer)}</p>`);
+  return out.join('');
+}
+
+/* ---------- wire up ---------- */
+
+let ready = false;
+
+function run() {
+  if (!ready) return;
+  const input = readForm();
+  try {
+    const r = buildPlan(input, { week: num('week') ?? 1 });
+    $('readout').innerHTML = render(r, { ...input, weightKg: input.weightKg, goalWeightKg: input.goalWeightKg });
+  } catch (err) {
+    $('readout').innerHTML = `<div class="err">Engine threw:\n\n${esc(err.message)}\n\n${esc(err.stack || '')}</div>`;
+  }
+}
+
+document.addEventListener('input', (e) => {
+  if (e.target.closest('aside.controls')) run();
+});
+
+fetch('./data/exercises.json')
+  .then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching exercises.json`);
+    return res.json();
+  })
+  .then((data) => {
+    setLibrary(data);
+    $('libinfo').textContent = `${data.count} exercises · v${data.version}`;
+    ready = true;
+    run();
+  })
+  .catch((err) => {
+    $('readout').innerHTML = `<div class="err">Could not load the exercise library.
+
+${esc(err.message)}
+
+This page must be served over HTTP — fetch() is blocked on file:// URLs.
+From the engine folder run:
+
+    python3 -m http.server 8000
+
+then open http://localhost:8000/preview.html</div>`;
+  });
+</script>
+</body>
+</html>
