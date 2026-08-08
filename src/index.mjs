@@ -151,6 +151,7 @@ export function buildPlan(raw, opts = {}) {
     occupationActivity: input.occupationActivity,
     weeklyExerciseKcalAtStart: programme.weeklyExerciseKcal,
     targetRateFraction: (timeline.ratePctPerWeek ?? 0.75) / 100,
+    startMeasurements: input.measurements,
   });
 
   const forecast = reconcile({

@@ -309,11 +309,24 @@
     </div>
     <div class="row2">
       <div class="field"><label for="goalWeightKg">Goal (kg)</label><input type="number" id="goalWeightKg" value="68" step="0.5"></div>
-      <div class="field"><label for="timeframeWeeks">Weeks</label><input type="number" id="timeframeWeeks" value="14"></div>
+      <div class="field"><label for="timeframeWeeks">Reach goal in (weeks)</label><input type="number" id="timeframeWeeks" value="14">
+        <span class="note" style="font-size:0.68rem;color:var(--ink-soft);display:block;margin-top:0.15rem">How many weeks you want to reach your goal weight in.</span>
+      </div>
     </div>
 
     <div class="eyebrow">Measurements</div>
     <div id="measurements"></div>
+
+    <div class="eyebrow">Lifestyle</div>
+    <div class="row2">
+      <div class="field"><label for="sleepHours">Sleep (hrs/night)</label><input type="number" id="sleepHours" value="7" min="2" max="14" step="0.5"></div>
+      <div class="field"><label for="dietaryPattern">Diet</label>
+        <select id="dietaryPattern"><option selected>omnivore</option><option>pescatarian</option><option>vegetarian</option><option>vegan</option></select>
+      </div>
+    </div>
+    <div class="field"><label>Stress (1 low – 5 high)</label>
+      <div class="checks" id="stress-group"></div>
+    </div>
 
     <div class="eyebrow">Training</div>
     <div class="field"><label>Days/week</label>
@@ -326,17 +339,28 @@
     <div class="field"><label for="occupationActivity">Daily activity</label>
       <select id="occupationActivity"><option selected>sedentary</option><option>light</option><option>active</option><option>very_active</option></select>
     </div>
-    <div class="field"><label for="week">Programme week</label><input type="number" id="week" value="1" min="1" max="52"></div>
+    <div class="field"><label for="impactAllowed">Impact tolerance</label>
+      <select id="impactAllowed"><option>low</option><option selected>moderate</option><option>high</option></select>
+      <span class="note" style="font-size:0.68rem;color:var(--ink-soft);display:block;margin-top:0.15rem">Caps how hard exercises can land — jumping, running — lower if joints are a concern.</span>
+    </div>
     <div class="field"><label for="emphasis">Focus area</label>
       <select id="emphasis"></select>
       <span class="note" style="font-size:0.7rem;color:var(--ink-soft);display:block;margin-top:0.2rem">
         Adds extra work for this area when time allows. Can't target fat loss to one body part — only the muscle work.
       </span>
     </div>
+    <details style="margin-top:0.6rem">
+      <summary style="cursor:pointer;font-size:0.78rem;color:var(--ink-soft)">Advanced</summary>
+      <div class="field" style="margin-top:0.5rem"><label for="week">Preview a later week</label>
+        <input type="number" id="week" value="1" min="1" max="52">
+        <span class="note" style="font-size:0.68rem;color:var(--ink-soft);display:block;margin-top:0.15rem">Compound lifts rotate to a new set every 5 weeks — use this to preview week 12, for example. Leave at 1 otherwise.</span>
+      </div>
+    </details>
 
     <div class="eyebrow">Equipment</div>
-    <div class="field"><label>Preset</label>
+    <div class="field"><label>Where you train</label>
       <div class="checks" id="locpreset-group"></div>
+      <span class="note" style="font-size:0.68rem;color:var(--ink-soft);display:block;margin-top:0.15rem">Changes which equipment you can pick below, not just what's checked.</span>
     </div>
     <div class="checks" id="equipment"></div>
 
@@ -395,7 +419,13 @@ function radios(host, items, name, selected) {
     </label>`).join('');
 }
 
-chips($('equipment'), EQUIP.map((e) => [e, e.replace(/_/g, ' ')]), 'equipment', ['dumbbells', 'bands']);
+function renderEquipmentGroup(scope) {
+  const items = scope === 'gym' ? GYM_EQUIPMENT : HOME_EQUIPMENT;
+  const preset = scope === 'gym' ? GYM_EQUIPMENT : ['dumbbells', 'bands'];
+  chips($('equipment'), items.map((e) => [e, e.replace(/_/g, ' ')]), 'equipment', preset);
+}
+
+renderEquipmentGroup('home');
 chips($('conditions'), CONDS.map((c) => [c, c.replace(/_/g, ' ')]), 'conditions', ['pcos', 'insulin_resistance']);
 chips($('flags'), FLAGS, 'flags');
 chips($('injuries'), INJ.map((i) => [i, i.replace(/_/g, ' ')]), 'injuries');
@@ -414,21 +444,54 @@ $('measurements').innerHTML = MEASURES.map(([id, label, def]) => `
     <div class="field"><label for="${id}">${esc(label)} (cm)</label>
       <input type="number" id="${id}" value="${def}"></div>
     <div class="field"><label for="${id}_target">${esc(label)} target</label>
-      <input type="number" id="${id}_target" placeholder="optional"></div>
-  </div>`).join('')
+      <input type="number" id="${id}_target" placeholder="auto"></div>
+  </div>
+  <p class="hint" id="${id}_hint" style="font-size:0.68rem;color:var(--ink-soft);margin:-0.3rem 0 0.6rem"></p>`).join('')
   + `<p style="font-size:0.7rem;color:var(--ink-soft);margin:0.2rem 0 0.6rem">
-       Set a target below the current value to auto-pick a training focus
-       area (largest gap wins) if you haven't chosen one below.
+       Targets auto-fill from your weight goal (edit any of them yourself —
+       once you do, that one stops auto-updating). The gap also auto-picks a
+       training focus area below, if you haven't chosen one yourself.
      </p>`;
+
+/* Targets auto-suggest from the weight goal until the user edits one directly. */
+document.querySelectorAll('[id$="_target"]').forEach((el) => {
+  el.addEventListener('input', () => { el.dataset.touched = el.value === '' ? '' : '1'; });
+});
+
+function updateMeasurementSuggestions() {
+  const weight = num('weightKg');
+  const goal = num('goalWeightKg');
+  if (!weight || !goal) return;
+  const ratio = goal / weight;
+  for (const [id] of MEASURES) {
+    const current = num(id);
+    const targetEl = $(`${id}_target`);
+    if (current == null || targetEl.dataset.touched === '1') continue;
+    targetEl.value = Math.round(current * ratio * 10) / 10;
+  }
+}
+
+function updateMeasurementHints() {
+  for (const [id, label] of MEASURES) {
+    const current = num(id);
+    const target = num(`${id}_target`);
+    const hint = $(`${id}_hint`);
+    if (current == null || target == null) { hint.textContent = ''; continue; }
+    const gap = Math.round((current - target) * 10) / 10;
+    hint.textContent = gap === 0 ? `at target`
+      : gap > 0 ? `${gap} cm to go` : `${Math.abs(gap)} cm past target`;
+  }
+}
 
 radios($('locpreset-group'), [['home', 'home'], ['gym', 'gym']], 'locpreset', 'home');
 radios($('daysPerWeek-group'), [1, 2, 3, 4, 5, 6, 7].map((n) => [n, n]), 'daysPerWeek', 3);
+radios($('stress-group'), [1, 2, 3, 4, 5].map((n) => [n, n]), 'stress', 3);
 $('emphasis').innerHTML = ENUMS.emphasis
   .map((e) => `<option value="${esc(e)}">${esc(e === 'none' ? 'none — balanced' : e)}</option>`).join('');
 
 document.querySelectorAll('input[name="locpreset"]').forEach((el) => {
   el.addEventListener('change', () => {
-    setChecks('equipment', el.value === 'home' ? HOME_EQUIPMENT : GYM_EQUIPMENT);
+    renderEquipmentGroup(el.value);
     run();
   });
 });
@@ -457,9 +520,12 @@ function readForm() {
     daysPerWeek: Number(radioValue('daysPerWeek') ?? 3),
     minutesPerSession: num('minutesPerSession'),
     experience: $('experience').value,
+    impactAllowed: $('impactAllowed').value,
     emphasis: $('emphasis').value,
     locations: [radioValue('locpreset') ?? 'home'],
     equipment: checked('equipment'),
+    sleepHours: num('sleepHours'),
+    stress: Number(radioValue('stress') ?? 3),
     measurements: {
       waistCm: num('waistCm'), hipCm: num('hipCm'), bellyCm: num('bellyCm'),
       thighCm: num('thighCm'), armCm: num('armCm'),
@@ -478,7 +544,7 @@ function readForm() {
       scoff: boolMap(checked('scoff')),
       cycleStatus: 'irregular',
     },
-    dietary: { pattern: 'omnivore' },
+    dietary: { pattern: $('dietaryPattern').value },
     seed: 'harness',
   };
 }
@@ -557,18 +623,27 @@ const BASIS_LABEL = {
   simulated: 'Week-by-week simulation',
 };
 
+const MEASURE_LABEL = Object.fromEntries(MEASURES.map(([id, label]) => [id, label]));
+
 function milestoneTable(sim) {
   const pts = sim.trajectory.filter((p) => p.week === 0 || p.intakeKcal != null);
   if (pts.length < 2) return '';
+  const measureKeys = [...new Set(pts.flatMap((p) => Object.keys(p.measurements ?? {})))];
+
   return `<table class="ex" style="margin-top:0.8rem">
     <tr><td class="slot">week</td><td class="slot">weight</td>
+      ${measureKeys.map((k) => `<td class="slot">${esc(MEASURE_LABEL[k] ?? k)}</td>`).join('')}
       <td class="slot">eat/day</td><td class="slot">maintenance</td></tr>
     ${pts.map((p) => `<tr>
       <td class="dose">${p.week}</td>
       <td class="dose">${p.weightKg} kg</td>
+      ${measureKeys.map((k) => `<td class="dose">${p.measurements?.[k] != null ? p.measurements[k] + ' cm' : '—'}</td>`).join('')}
       <td class="dose">${p.intakeKcal ?? '—'}</td>
       <td class="dose">${p.maintenanceKcal ?? '—'}</td>
-    </tr>`).join('')}</table>`;
+    </tr>`).join('')}</table>
+  ${measureKeys.length ? `<p style="font-size:0.7rem;color:var(--ink-soft);margin:0.4rem 0 0">
+    Measurement columns are proportional estimates from your projected weight loss — not something a specific exercise causes.
+  </p>` : ''}`;
 }
 
 function forecastCard(f, input) {
@@ -664,15 +739,19 @@ function render(r, input) {
 
   /* nutrition */
   const n = r.nutrition;
-  out.push(`<div class="card"><h3>Energy &amp; macros</h3><div class="grid">
-    ${stat('BMR', n.bmrKcal, ' kcal')}
-    ${stat('Maintenance', n.maintenanceKcal, ' kcal', `NEAT ${n.expenditureBreakdown.neatKcal} + training ${n.expenditureBreakdown.exerciseKcalPerDay}`)}
-    ${stat('Eat', n.intakeKcal, ' kcal', `deficit ${n.dailyDeficitKcal} (${n.deficitPctOfTdee}%)`)}
-    ${stat('Rate', n.achievableRatePctPerWeek, '%/wk', n.reducedFromRequest ? 'reduced from request' : 'as requested', n.reducedFromRequest)}
-    ${stat('Protein', n.macros.proteinG.target, ' g', `${n.macros.proteinPerKgUsed}/kg of ${n.macros.proteinReferenceWeightKg}kg ${n.macros.proteinReferenceMethod.replace(/_/g, ' ')}`)}
-    ${stat('Fat', n.macros.fatG.target, ' g', `min ${n.macros.fatG.min}`)}
-    ${stat('Carbs', n.macros.carbG.target, ' g')}
-    ${stat('Fibre', n.macros.fibreG, ' g')}
+  out.push(`<div class="card"><h3>Energy &amp; macros</h3>
+  <p style="margin:0 0 1rem;font-size:0.85rem;color:var(--ink-soft)">
+    How much to eat, and how it's split — worked out from your body info, activity, and the training plan below.
+  </p>
+  <div class="grid">
+    ${stat('BMR', n.bmrKcal, ' kcal', 'energy burned at rest, before any movement')}
+    ${stat('Maintenance', n.maintenanceKcal, ' kcal', `what holds your current weight: daily activity ${n.expenditureBreakdown.neatKcal} + training ${n.expenditureBreakdown.exerciseKcalPerDay}`)}
+    ${stat('Eat', n.intakeKcal, ' kcal', `your daily target — deficit ${n.dailyDeficitKcal} kcal (${n.deficitPctOfTdee}%) below maintenance`)}
+    ${stat('Weekly loss rate', n.achievableRatePctPerWeek, '%/wk', n.reducedFromRequest ? 'of bodyweight — reduced from what you asked for' : 'of bodyweight, as requested', n.reducedFromRequest)}
+    ${stat('Protein', n.macros.proteinG.target, ' g', `${n.macros.proteinPerKgUsed}/kg — protects muscle while you're in a deficit`)}
+    ${stat('Fat', n.macros.fatG.target, ' g', `min ${n.macros.fatG.min} g — needed for hormone health`)}
+    ${stat('Carbs', n.macros.carbG.target, ' g', 'fuels training and daily energy')}
+    ${stat('Fibre', n.macros.fibreG, ' g', 'digestion and fullness')}
   </div>
   ${n.clamps.length ? `<p style="font-family:var(--mono);font-size:0.7rem;color:var(--advisory);margin:0.9rem 0 0">
     clamps applied: ${n.clamps.map(esc).join(' · ')}</p>` : ''}
@@ -724,12 +803,25 @@ let ready = false;
 
 function run() {
   if (!ready) return;
+  updateMeasurementSuggestions();
+  updateMeasurementHints();
   const input = readForm();
   try {
     const r = buildPlan(input, { week: num('week') ?? 1 });
     $('readout').innerHTML = render(r, { ...input, weightKg: input.weightKg, goalWeightKg: input.goalWeightKg });
+    updateRatioHints(r.body);
   } catch (err) {
     $('readout').innerHTML = `<div class="err">Engine threw:\n\n${esc(err.message)}\n\n${esc(err.stack || '')}</div>`;
+  }
+}
+
+function updateRatioHints(body) {
+  if (!body) return;
+  if (body.waistToHeight != null) {
+    $('waistCm_hint').textContent += ` · waist÷height ${body.waistToHeight} (${(body.waistToHeightBand || '').replace(/_/g, ' ')})`;
+  }
+  if (body.waistToHip != null) {
+    $('hipCm_hint').textContent += ` · waist÷hip ${body.waistToHip} (${(body.waistToHipBand || '').replace(/_/g, ' ')})`;
   }
 }
 

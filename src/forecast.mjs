@@ -21,6 +21,24 @@ const STALL_THRESHOLD_KG = 0.05; // weekly loss below this counts as stalled
 const r1 = (x) => Math.round(x * 10) / 10;
 
 /**
+ * Scales each provided circumference measurement by the same fraction the
+ * bodyweight has changed by — the same principle already applied to
+ * training energy above. Not a spot-reduction claim: nothing here is
+ * exercise-driven, it is the systemic-loss assumption applied one level
+ * further than just the scale weight. Measurements the user left blank are
+ * simply absent from the result.
+ */
+function projectMeasurements(startMeasurements, ratio) {
+  if (!startMeasurements) return undefined;
+  const out = {};
+  for (const [key, value] of Object.entries(startMeasurements)) {
+    if (value == null) continue;
+    out[key] = r1(value * ratio);
+  }
+  return Object.keys(out).length ? out : undefined;
+}
+
+/**
  * @param {object} a
  * @param {number} a.startWeightKg
  * @param {number} [a.goalWeightKg]
@@ -35,10 +53,13 @@ const r1 = (x) => Math.round(x * 10) / 10;
 export function simulate({
   startWeightKg, goalWeightKg, heightCm, age, sex,
   occupationActivity, weeklyExerciseKcalAtStart,
-  targetRateFraction, horizonWeeks,
+  targetRateFraction, horizonWeeks, startMeasurements,
 }) {
   let weight = startWeightKg;
-  const trajectory = [{ week: 0, weightKg: r1(weight) }];
+  const trajectory = [{
+    week: 0, weightKg: r1(weight),
+    measurements: projectMeasurements(startMeasurements, 1),
+  }];
 
   let reachedGoal = false;
   let stalledAtWeek = null;
@@ -74,12 +95,15 @@ export function simulate({
 
     weight -= loss;
 
+    const ratio = weight / startWeightKg;
+
     if (week % 2 === 0 || week === limit) {
       trajectory.push({
         week,
         weightKg: r1(weight),
         intakeKcal: d.intakeKcal,
         maintenanceKcal: expenditure.total,
+        measurements: projectMeasurements(startMeasurements, ratio),
       });
     }
 
@@ -89,6 +113,7 @@ export function simulate({
       trajectory.push({
         week, weightKg: r1(weight),
         intakeKcal: d.intakeKcal, maintenanceKcal: expenditure.total,
+        measurements: projectMeasurements(startMeasurements, ratio),
       });
       break;
     }

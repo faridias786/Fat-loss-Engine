@@ -92,6 +92,35 @@ test('a higher activity occupation reaches the goal sooner', () => {
   assert.ok(act.weeksToGoal < sed.weeksToGoal);
 });
 
+/* ---------------- measurement projection ---------------- */
+
+test('measurements scale down proportionally with bodyweight', () => {
+  const s = sim({ startMeasurements: { waistCm: 100, bellyCm: 96 } });
+  const last = s.trajectory.at(-1);
+  const ratio = last.weightKg / 82;
+  assert.ok(Math.abs(last.measurements.waistCm - 100 * ratio) < 0.2);
+  assert.ok(Math.abs(last.measurements.bellyCm - 96 * ratio) < 0.2);
+  assert.ok(last.measurements.waistCm < 100, 'waist should shrink as weight drops');
+});
+
+test('a measurement left null never appears in the trajectory', () => {
+  const s = sim({ startMeasurements: { waistCm: 100, hipCm: null, armCm: undefined } });
+  for (const p of s.trajectory) {
+    if (p.measurements) {
+      assert.ok(!('hipCm' in p.measurements));
+      assert.ok(!('armCm' in p.measurements));
+    }
+  }
+  assert.ok(s.trajectory.some((p) => p.measurements?.waistCm != null));
+});
+
+test('no measurements provided does not throw and produces no measurements key', () => {
+  const s = sim({ startMeasurements: undefined });
+  for (const p of s.trajectory) {
+    assert.equal(p.measurements, undefined);
+  }
+});
+
 /* ---------------- integration ---------------- */
 
 test('the plan forecast supersedes the naive timeline', () => {
